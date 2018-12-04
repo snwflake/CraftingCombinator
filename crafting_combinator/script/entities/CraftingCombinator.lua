@@ -249,9 +249,11 @@ function _M:update()
 				-- request modules that have been removed and can be used with the new recipe
 				if self.settings.cc_request_modules then self:request_modules(recipe); end
 			end
-			
-			-- set the new recipe
-			self.assembler.set_recipe(recipe) 
+			if recipe ~= self.assembler.get_recipe() then
+				-- set the new recipe
+				self.assembler.set_recipe(nil) 
+				self.assembler.set_recipe(recipe) 
+			end			
 		end
 		
 		-- read mode
